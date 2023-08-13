@@ -47,35 +47,48 @@ client.on('ready', (c) => {
 
 client.on('messageCreate', async (message) => {
     if (message.author.bot) {
-        return
+        return;
     }
 
-    const content = message.content.toLowerCase(); // Convert the content to lowercase
+    const content = message.content.toLowerCase();
 
-    if (content === 'hola') {
-        message.reply('holi :3')
-    }
-    if (content === 'holi') {
-        message.reply('hola :3')
-    }
-    if (content === '!gn') {
-        message.channel.send(message.author.toString() + ' se va a la camucha y les desea unas re buenas noches a tudo o mundo 💞🌙')
-    }
+    switch (content) {
+        case 'hola':
+            message.reply('holi :3');
+            break;
 
-    if (message.content === '!proverbio') {
-        const randomProv = proverbios[Math.floor(Math.random() * proverbios.length)];
-        message.channel.send(randomProv + '\n\n🏮**LECUELDALO** 🏮')
-    }
-    if (message.content == '!gm') {
-        const saludoBuenosDias = buenosdias[Math.floor(Math.random() * buenosdias.length)];
-        message.channel.send(message.author.toString() + saludoBuenosDias)
+        case 'holi':
+            message.reply('hola :3');
+            break;
 
+        case '!gn':
+            message.channel.send(`${message.author.toString()} se va a la camucha y les desea unas re buenas noches a tudo o mundo 💞🌙`);
+            break;
 
-        let url = 'https://g.tenor.com/v1/search?q=skull&key=LIVDSRZULELA&limit=100'
-        let response = await fetch(url)
-        let json = await response.json()
-        let index = Math.floor(Math.random() * json.results.length)
-        message.channel.send(json.results[index].url)
+        case '!proverbio':
+            const randomProv = proverbios[Math.floor(Math.random() * proverbios.length)];
+            message.channel.send(randomProv + '\n\n🏮**LECUELDALO** 🏮');
+            break;
+
+        case '!gm':
+            const saludoBuenosDias = buenosdias[Math.floor(Math.random() * buenosdias.length)];
+            message.channel.send(`${message.author.toString()} ${saludoBuenosDias}`);
+            try {
+                let url = 'https://g.tenor.com/v1/search?q=azumanga&key=LIVDSRZULELA&limit=100';
+                let response = await axios.get(url);
+                let json = response.data;
+                let index = Math.floor(Math.random() * json.results.length);
+                message.channel.send(json.results[index].url);
+            } catch (error) {
+                console.error('Error fetching GIF:', error);
+            }
+            break;
+
+        default:
+            if (content.startsWith('!')) {
+                message.channel.send(`${message.author.toString()} nononono alto ahi papito, el comando "${content}" no existe`);
+            }
+            break;
     }
 });
 //FUNCION DE PREGUNTA
