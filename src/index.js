@@ -121,7 +121,7 @@ client.on('messageCreate', (message) => {
                 message.channel.send('se te acabo el tiempo jiji :3 mejor suerte la proxima, **la respuesta era: **' + randomQuestion.answer); //mensaje de error cuando se acaba el tiempo
             }
         });
-    } sdasd
+    }
 });
 
 
