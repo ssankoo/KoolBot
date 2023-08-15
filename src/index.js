@@ -63,6 +63,15 @@ client.on('messageCreate', async (message) => {
 
         case '!gn':
             message.channel.send(`${message.author.toString()} se va a la camucha y les desea unas re buenas noches a tudo o mundo 💞🌙`);
+            try {
+                let url = 'https://g.tenor.com/v1/search?q=goodnight&key=LIVDSRZULELA&limit=100';
+                let response = await axios.get(url);
+                let json = response.data;
+                let index = Math.floor(Math.random() * json.results.length);
+                message.channel.send(json.results[index].url);
+            } catch (error) {
+                console.error('Error fetching GIF:', error);
+            }
             break;
 
         case '!proverbio':
