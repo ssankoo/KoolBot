@@ -95,7 +95,8 @@ client.on('messageCreate', async (message) => {
 
         default:
             if (content.startsWith('!')) {
-                message.channel.send(`${message.author.toString()} nononono alto ahi papito, el comando "${content}" no existe`);
+                //message.channel.send(`${message.author.toString()} nononono alto ahi papito, el comando "${content}" no existe`);
+                message.channel.send(`${message.author.toString()} la lista de comandos es públicamente conocida, rogamos por paciencia`);
             }
             break;
     }
